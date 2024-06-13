@@ -1,0 +1,60 @@
+---
+title: "Climate Report"
+author: "Joseph Thomas"
+date: "2024-06-12"
+output: html_document
+---
+
+```{r setup, include=FALSE }
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+
+# download data
+weather<-read_csv('weather.csv')
+```
+
+
+```{r}
+# gather all information about the data set
+# summary(weather)
+
+#answer the question Effect of temperature on precipatation from 2010 to 2020?
+
+#make the data set to answer the question
+
+weather<-weather %>% 
+  mutate(year=year(DATE)) %>% 
+  filter(year>=2010&year<= 2020) %>% 
+  select(DATE,PRCP,TMAX)
+#making a plot of  the data set 
+
+
+
+
+weather10_20<-weather %>% 
+  mutate(year=year(DATE)) %>% 
+filter(year<= 2010&2020,) %>% 
+  select(DATE,PRCP,TMAX)
+weather10_20<-na.omit(weather10_20)
+
+ggplot(weather10_20, aes(x = DATE, y = PRCP, color= TMAX )) +
+  geom_line()+
+labs(x = 'Time (Years)',
+       y = 'precipitation (%)',
+       title = 'Correlation between PRCP and TMAX', x = "Years", y = "Precipitation")
+```
+
+ 
+```{r}
+ggplot(weather10_20, aes(x = DATE, y = PRCP, color= TMAX )) +
+  geom_line()
+weather10_20<-na.omit(weather10_20)
+
+```
+
+# Climate Question
+
+- Effect of temperature on precipatation from 2010 to 2020? 
